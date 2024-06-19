@@ -28,5 +28,3 @@ console.log(c2); // works fine for let
 
 const c3 = 100;
 c3 = 1000;         // Uncaught TypeError: Assignment to constant variable
-
-// 

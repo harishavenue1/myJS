@@ -147,3 +147,77 @@ b) internal functions reUse main x
 
     const c3 = 100;
     c3 = 1000;       // Uncaught TypeError: Assignment to constant variable
+
+// Lesson 9
+
+    Block Scoped
+    ------------
+    https://www.youtube.com/watch?v=lW_erSjyMeM&t=1160s
+
+    i)
+    {
+        // block
+        // variables here are under block scoped (b & c)
+
+        var a = 10;     // global scoped
+        let b = 20;
+        const c = 30;
+        console.log(a); // 10
+        console.log(b); // 20
+        console.log(c); // 30
+    }
+
+    console.log(a); // 10
+    console.log(b); // Reference Error: b is not defined
+    console.log(c);
+
+    ii)
+    Shadow variable - var
+
+    var a = 100;
+    {
+        var a = 10;
+        let b = 20;
+        const c = 30;
+        console.log(a); // 10
+    }
+    console.log(a);     // 10
+
+    iii)
+    Shadow variable - let & const
+
+    let b = 100;
+    const c = 200;
+    {
+        var a = 10;
+        let b = 20;
+        const c = 30;
+        console.log(b); // 20
+        console.log(c); // 30
+    }
+    console.log(b);     // 100
+    console.log(c);     // 200
+
+    iv)
+    illegal shadowing
+
+    let a = 20;
+    {
+        var a = 10;     // Syntax Error: Identifier 'a' has already been declared
+    }
+
+    iv)
+    legal shadowing
+
+    let a = 20;
+    {
+        let a = 10;     
+    }
+
+    iv)
+    legal shadowing
+
+    var a = 20;
+    {
+        let a = 10;     
+    }
