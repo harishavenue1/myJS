@@ -221,3 +221,34 @@ b) internal functions reUse main x
     {
         let a = 10;     
     }
+
+// Lesson 10
+
+    Closures
+    ------------
+    https://www.youtube.com/watch?v=qikxEIxsXco&list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP&index=12
+
+    A closure is a combination of a function bundled together with refs to its 
+    surrounding state.
+
+    // 1
+    function x() {
+        var a = 7;
+        function y() {
+            console.log(a);
+        }
+        y();
+    }
+    x();                        // 7
+
+    // 2
+    function x() {
+        var a = 7;
+        function y() {
+            console.log(a);
+        }
+        return y;
+    }
+
+    var z = x();
+    z();                        // 7 
