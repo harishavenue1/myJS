@@ -57,3 +57,60 @@ function z() {
     x();
 }
 z();
+
+// ---- (VAR) - Cloures Interview Qn - Same Copy of i
+function x1() {
+    for (var i = 1; i <= 5; i++) {
+        setTimeout(function () {
+            console.log(i);
+        }, i * 1000);
+    }
+    console.log("Namaste JS!");
+}
+// x1();
+
+// output is below due to closures (let)
+// 6
+// 6
+// 6
+// 6
+// 6
+
+// ---- (let) - Cloures Interview Qn - BLOCK SCOPE - New Copy of i
+function x2() {
+    for (let i = 1; i <= 5; i++) {
+        setTimeout(function () {
+            console.log(i);
+        }, i * 1000);
+    }
+    console.log("Namaste JS!");
+}
+// x2();
+
+// output is below due to closures (var)
+// 1
+// 2
+// 3
+// 4
+// 5
+
+// ---- (VAR) - Cloures Interview Qn - LOGIC ADDED for New Copy of i
+function x3() {
+    for (var i = 1; i <= 5; i++) {
+        function close(i) {
+            setTimeout(function () {
+                console.log(i);
+            }, i * 1000);
+        }
+        close(i); // here we pass new value of i
+    }
+    console.log("Namaste JS!");
+}
+x3();
+
+// output is below due to closures (let)
+// 1
+// 2
+// 3
+// 4
+// 5
