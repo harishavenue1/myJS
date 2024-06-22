@@ -252,3 +252,115 @@ b) internal functions reUse main x
 
     var z = x();
     z();                        // 7 
+
+// Lesson 11
+
+    Functions
+    ---------
+
+    Function Statement or Function Declaration
+    ------------------------------------------
+
+        function a () {
+
+        }
+
+    Function Expression
+    ------------------------------------------
+
+        var b = function () {
+
+        }
+
+    Anonymous Function
+    ------------------------------------------
+
+        function () {
+            console.log("b called");
+        }
+
+    Named Function Expression
+    ------------------------------------------
+
+        var b1 = function abc() {
+            console.log("b1 called");
+        }
+        b1();
+
+    Difference between Parameters and Arguments
+    ------------------------------------------
+
+        var b2 = function (param1, param2) { // this is parameters
+            console.log("b2 called");
+        }
+        b2(1, 2); // this is arguments
+
+    First Class Functions
+    ------------------------------------------
+
+        var b3 = function (param1) {    // received params as functions
+            return function xyz() {     // return functions
+
+            }
+        }
+        function fn() {
+
+        }
+        console.log(b3(fn));            // sending functions as arguments
+
+    Arrow Functions
+    ------------------------------------------
+        an = () => {
+
+        }
+
+// Lesson 12
+
+    What is Callback Function
+    -------------------------
+
+        setTimeout(function () {        // async timeout
+            console.log("timed out!")
+        }, 5000);
+
+    Blocking the main thread
+    Power of Callbacks
+    Deep about Event Listeners
+    Closures with Event Listeners
+    Scope with Event listeners
+    --------------------------
+        function attachEventListeners() {
+            let count = 0;
+            document.getElementById("clickMe").addEventListener("click", function xyz() {
+                console.log("button clicked ", ++count); // closure
+            });
+        }
+        attachEventListeners();
+
+    GC and remove Event listeners
+    -----------------------------
+    why need to remove event listeners
+    Eventlisteners are heavy, as it takes more memory, due to closures, even if call stack is empty
+    so need logic to remove eventListeners with GC
+
+// Lesson EventLOOP
+
+    CallStack <- EventLoop <- Callback Queue <- Timer
+
+    // priorityTask (all triggered by promises and mutations)
+    CallStack <- EventLoop <- MicroTask Queue <- Timer
+
+    console.log('start');
+
+    setTimeout(function cb () {
+        console.log('timeout');
+    },5000);
+
+    console.log('end');
+
+    // here, as we run, global context starts, with printing start, then setTimeout func is read and moved to timer,
+    // then it prints end and finally global context task is over and is out of call stack
+    // but when timer is over, callback function needs to print('timeout'), but there is no global context running,
+    // so here comes the callback queue with eventloop
+    // eventloop keeps checking on callback queue if any arised out of timeout events,
+    // once callback queue is inserted with any task, eventLoop moves it to CallStack to run and hence process completes.
