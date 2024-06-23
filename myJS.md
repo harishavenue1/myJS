@@ -364,3 +364,91 @@ b) internal functions reUse main x
     // so here comes the callback queue with eventloop
     // eventloop keeps checking on callback queue if any arised out of timeout events,
     // once callback queue is inserted with any task, eventLoop moves it to CallStack to run and hence process completes.
+
+// Lesson JS-Engine [JRE]
+
+    V8 - Chrome [Fasted]
+    Chakra - Edge
+    SpiderMonkey - Firefox
+
+    Steps -> Parsing -> Compilation -> Execution
+
+    Parsing
+    -------
+    JS Engine, converts code to Tokens via AST [Abstract Syntax Tree]
+
+    Interpreter vs Compiler
+    ----------------------
+    Interpreter
+        Executes line by line, without knowing what is in next line
+        Faster Run, as there is no need to compile
+    
+    Compiler
+        Compiles all lines before in hand, convert to optimized code size, to execute faster
+        Performance wise better as Code is Optimized for Run
+
+    JS Engine - Interpreter + Compiler - Modern Tech
+
+    Compiler
+        Compiles Code and moves byteCode to Execution Phase
+
+    Execution
+        Starts the Memory Heap
+        Starts the Call Stack with Global Execution Context - with tasks added in LIFO
+        Garbage Collections also begins to clear memory once any variable is unused in Memory Heap
+
+// Lesson - Trust Issues with setTimeout
+
+    SetTimeOut method may not execute with timeSec given, due to call stack.
+    As the eventLoop cant push task from call back queue to call stack, as the GEC is still executing the main lines of code.
+    So only after GEC is done, event loop pushed the task from call back queue to call stack, only then setTimeOut lines work.
+    So the delay.
+
+// Lesson - Higher Order Function
+
+    Function which takes another fn as an argument or returns fn is Higher order Function.
+
+// Lesson - Promise
+
+    The way of handing the callback fn only when the state is fullfiled
+    using then() after an async operation.
+
+    This was no trust issues and no inversion of control.
+
+    This way a fn will be called for sure.
+
+    "Promise is an object which promises eventual completion of a callback fn post an async operation"
+
+    Promise is immutable, trustable
+
+    2 parts of promise, state and result.
+
+// Lesson - Async Await
+
+    Async function always returns a Promise.
+
+    If return value is not a promise object, then function wraps in promise object.
+
+    Async Await -- Used to handle promises.
+
+    Await - can be used only in async function.
+
+    Old way to handle promise - then
+    New way to handle promise - await
+
+    Old way to handle promise - then
+    Js Engine doesn wait for callback in then method to resolve
+
+    New way to handle promise - await
+    Js Engine will wait (via callStack) for promise to resolve with await keyword
+
+    If P1 is resolved in 10s and P2 in 5s, then P2 needs to wait P1 to complete to print result.
+    Prints P1 and P2 together, as P2 is already resolved during P1 phase and was waiting for P1.
+
+    Operation
+        CallStack gets handlePromise (name of method) having P1 and P2 to resolve.
+        Since P1 takes 10s, the method handlePromise, gets suspended till then.
+        And Call stack continues the main thread operation.
+        When 10s is over, handlePromise method is taken back to callStack and resumes operation.
+        Since 10s is over, at same P2 is also resolved, though control hasnt gone to that line.
+        So P1 and P2 output is printed at same time.
