@@ -452,3 +452,26 @@ b) internal functions reUse main x
         When 10s is over, handlePromise method is taken back to callStack and resumes operation.
         Since 10s is over, at same P2 is also resolved, though control hasnt gone to that line.
         So P1 and P2 output is printed at same time.
+
+
+// Lesson - Types of Promises
+
+    Input is iterable promises or Array of Promises.
+
+    Promise.all()           
+        -> All Should Resolve so waiting till last, or if any Rejects, Error is Thrown.
+        -> Fail Fast
+
+    Promise.allSetteled()   
+        -> Even if any rejects, it will still wait for All to Complete.
+
+    Promise.race()
+        -> Seeking for 1st success of 1st failure.
+        -> Which ever promises resolves first, its value is returned.
+        -> If 1st promise rejects, error will be thrown.
+
+    Promise.any()
+        -> Seeking for 1st success.
+        -> Will wait for 1st promise to get successful.
+        -> Unlike race(), if 1st promise, instead of error, it will wait for next promise to resolve. Error will be ignored.
+        -> If all fails, then return value will be aggregrated error of all promises.
